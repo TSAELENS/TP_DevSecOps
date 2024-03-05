@@ -4,14 +4,16 @@ FROM node:14
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Copier les fichiers de dépendances et installer les dépendances
+# Copier les fichiers 'package.json' et 'package-lock.json' (si disponible)
 COPY package*.json ./
+
+# Installer les dépendances du projet
 RUN npm install
 
-# Copier les autres fichiers du projet dans le conteneur
+# Copier les fichiers et dossiers du projet dans le répertoire de travail du conteneur
 COPY . .
 
-# Exposer le port sur lequel votre app va tourner
+# Exposer le port que l'application utilise
 EXPOSE 3000
 
 # Commander pour lancer l'application
