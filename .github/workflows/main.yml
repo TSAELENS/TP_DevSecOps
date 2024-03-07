@@ -45,5 +45,5 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_PROJECT_KEY: PE-TO-MDS_TP_DevSecOps
           SONAR_ORG: pe-to-mds
-          
+           
 
