@@ -36,8 +36,13 @@ jobs:
         run: npx snyk test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      - name: SonarCloud analysis
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: SonarCloud analysis
+      uses: sonarsource/sonarcloud-github-action@master
+      with:
+        projectBaseDir: .
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_PROJECT_KEY: TSAELENS_TP_DevSecOps
+        SONAR_ORG: tsaelens
+
