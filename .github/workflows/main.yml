@@ -38,12 +38,11 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: SonarCloud analysis
         uses: sonarsource/sonarcloud-github-action@master
-        with:
-          projectBaseDir: .
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_PROJECT_KEY: PE-TO-MDS_TP_DevSecOps
           SONAR_ORG: pe-to-mds
+
            
 
