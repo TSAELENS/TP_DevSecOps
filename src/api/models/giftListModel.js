@@ -2,10 +2,10 @@ const mysql = require('mysql2/promise');
 
 // Configuration de la connexion MySQL
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'gifts_db'
+  host: 'db', // ou 'localhost' si local
+  user: 'root',
+  password: 'password',
+  database: 'CadeauxAnniv'
 });
 
 const giftModel = {
