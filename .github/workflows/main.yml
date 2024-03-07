@@ -1,4 +1,4 @@
-name: Node.js CI/CD
+name: Node.js CI/CD with Security
 
 on:
   push:
@@ -20,6 +20,23 @@ jobs:
       run: npm install
     - name: Run tests
       run: npm test
+    - name: Security Check
+      run: npm run security-check
     # - name: Build
     #   run: npm run build
-    # Ajoutez ici des étapes pour le déploiement si nécessaire
+
+  security-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/node@master
+      with:
+        command: test
+    - name: SonarCloud analysis
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
