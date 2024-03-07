@@ -1,15 +1,40 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const mysql = require('mysql2/promise');
 const giftListRoutes = require('./api/routes/giftListRoutes');
 
 const app = express();
-
 app.use(express.json()); // pour parser les corps de requêtes JSON
-app.use('/api', giftListRoutes);
 
-mongoose.connect('mongodb://ma_db:27017/CadeauxAnniv', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+async function main() {
+  const connection = await mysql.createConnection({
+      host: 'db', // ou 'localhost' si local
+      user: 'root',
+      password: 'password',
+      database: 'CadeauxAnniv'
+  });
+  
+    console.log('Connexion à MySQL réussie !');
+
+    app.use((req, res, next) => {
+        req.db = connection;
+        next();
+    });
+
+    app.use('/api', giftListRoutes);
+
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    });
+}
+
+main().catch(err => {
+    console.error('Erreur de connexion à la base de données:', err);
+});
+
+
+
+
+
+

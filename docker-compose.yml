@@ -1,26 +1,24 @@
 version: '3.8'
 services:
   app:
-    container_name: mon_app
+    container_name: app
     build: .
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - .:/app
-      - /app/node_modules
     depends_on:
       - db
     command: npm start
 
   db:
-    container_name: ma_db
-    image: mongo
+    container_name: db
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: CadeauxAnniv
     ports:
-      - "27017:27017"
+      - "3306:3306"
     volumes:
-      - mongodb_data:/data/db
+      - mysql_data:/var/lib/mysql
 
 volumes:
-  mongodb_data:
+  mysql_data:
