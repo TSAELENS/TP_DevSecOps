@@ -14,11 +14,11 @@ const giftModel = {
         return rows;
     },
     addGift: async (gift) => {
-        const [result] = await pool.query('INSERT INTO gifts (name, price) VALUES (?, ?)', [gift.name, gift.price]);
+        const [result] = await pool.query('INSERT INTO gifts (name, description, price) VALUES (?, ?)', [gift.name, gift.description, gift.price]);
         return result;
     },
     updateGift: async (id, gift) => {
-        const [result] = await pool.query('UPDATE gifts SET name = ?, price = ? WHERE id = ?', [gift.name, gift.price, id]);
+        const [result] = await pool.query('UPDATE gifts SET name = ?, description = ?, price = ? WHERE id = ?', [gift.name, gift.description, gift.price, id]);
         return result;
     },
     deleteGift: async (id) => {
