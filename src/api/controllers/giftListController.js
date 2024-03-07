@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const giftModel = require('../model/giftListModel');
+=======
+const giftModel = require('../models/giftListModel');
+>>>>>>> 0fd9d214cc546a9bafb042938b0dde76456b8adc
 
 const giftController = {
     getAllGifts: async (req, res) => {
