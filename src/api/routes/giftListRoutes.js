@@ -5,9 +5,16 @@ const router = express.Router();
 // Route pour créer une nouvelle liste de cadeaux
 router.post('/lists', giftListController.createList);
 
-// Ajoutez ici d'autres routes selon vos besoins, par exemple :
-// router.get('/lists', giftListController.getAllLists);
-// router.put('/lists/:id', giftListController.updateList);
-// router.delete('/lists/:id', giftListController.deleteList);
+// Route pour mettre à jour une liste de cadeaux
+router.put('/lists/:id', giftListController.updateList);
+
+// Route pour supprimer une liste de cadeaux
+router.delete('/lists/:id', giftListController.deleteList);
+
+// Route pour récupérer toutes les listes de cadeaux
+router.get('/lists', giftListController.getAllLists);
+
+// Route pour récupérer une liste de cadeaux spécifique
+router.get('/lists/:id', giftListController.getListById);
 
 module.exports = router;
